@@ -38,7 +38,7 @@ const sketch = ({ context }) => {
     0.01, // near clipping
     100 // far clipping
   );
-  camera.position.set(2, 2, -4);
+  camera.position.set(3, 3, -5);
   camera.lookAt(new THREE.Vector3());
 
   // Setup camera controller
@@ -50,7 +50,9 @@ const sketch = ({ context }) => {
   // Setup a geometry
   const geometry = new THREE.SphereGeometry(1, 32, 16);
 
-  const texture = new THREE.TextureLoader().load('earth.jpg');
+  const loader = new THREE.TextureLoader();
+  const texture = loader.load('earth.jpg');
+  const moonTexture = loader.load('moon.jpg');
 
   // Setup a material
   const material = new THREE.MeshBasicMaterial({
@@ -60,6 +62,14 @@ const sketch = ({ context }) => {
   // Setup a mesh with geometry + material
   const mesh = new THREE.Mesh(geometry, material);
   scene.add(mesh);
+
+  const moonMaterial = new THREE.MeshBasicMaterial({
+    map: moonTexture
+  });
+  const moonMesh = new THREE.Mesh(geometry, moonMaterial);
+  moonMesh.position.set(1.5, 0.5, 0);
+  moonMesh.scale.setScalar(0.25)
+  scene.add(moonMesh);
 
   // draw each frame
   return {
