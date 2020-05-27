@@ -50,10 +50,11 @@ const sketch = ({ context }) => {
   // Setup a geometry
   const geometry = new THREE.SphereGeometry(1, 32, 16);
 
+  const texture = new THREE.TextureLoader().load('earth.jpg');
+
   // Setup a material
   const material = new THREE.MeshBasicMaterial({
-    color: "yellow",
-    wireframe: true
+    map: texture
   });
 
   // Setup a mesh with geometry + material
