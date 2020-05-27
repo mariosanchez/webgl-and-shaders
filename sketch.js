@@ -63,13 +63,15 @@ const sketch = ({ context }) => {
   const mesh = new THREE.Mesh(geometry, material);
   scene.add(mesh);
 
+  const moonGroup = new THREE.Group();
   const moonMaterial = new THREE.MeshBasicMaterial({
     map: moonTexture
   });
   const moonMesh = new THREE.Mesh(geometry, moonMaterial);
   moonMesh.position.set(1.5, 1, 0);
   moonMesh.scale.setScalar(0.25)
-  scene.add(moonMesh);
+  moonGroup.add(moonMesh);
+  scene.add(moonGroup);
 
   // draw each frame
   return {
@@ -84,6 +86,7 @@ const sketch = ({ context }) => {
     render({ time }) {
       mesh.rotation.y = time * 0.15;
       moonMesh.rotation.y = time * 0.075;
+      moonGroup.rotation.y = time * 0.33;
 
       controls.update();
       renderer.render(scene, camera);
