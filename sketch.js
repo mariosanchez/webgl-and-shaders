@@ -55,8 +55,11 @@ const sketch = ({ context }) => {
   const moonTexture = loader.load('moon.jpg');
 
   // Setup a material
-  const material = new THREE.MeshBasicMaterial({
-    map: texture
+  // MeshBasicMaterial does not accept light
+  const material = new THREE.MeshStandardMaterial({
+    map: texture,
+    roughness: 1,
+    metalness: 0,
   });
 
   // Setup a mesh with geometry + material
@@ -64,14 +67,35 @@ const sketch = ({ context }) => {
   scene.add(mesh);
 
   const moonGroup = new THREE.Group();
-  const moonMaterial = new THREE.MeshBasicMaterial({
-    map: moonTexture
+  const moonMaterial = new THREE.MeshStandardMaterial({
+    map: moonTexture,
+    roughness: 1,
+    metalness: 0,
   });
   const moonMesh = new THREE.Mesh(geometry, moonMaterial);
   moonMesh.position.set(1.5, 1, 0);
   moonMesh.scale.setScalar(0.25)
   moonGroup.add(moonMesh);
   scene.add(moonGroup);
+
+  const light = new THREE.PointLight('white', 2);
+  light.position.setScalar(2);
+  scene.add(light);
+  const sunGroup = new THREE.Group();
+  sunGroup.add(light);
+  scene.add(sunGroup);
+
+
+
+
+  // PointLightHelper allow us to see a light position
+  scene.add(new THREE.PointLightHelper(light, 0.15));
+
+  // GridHelper allow us to see the grid of our scene
+  // scene.add(new THREE.GridHelper(5, 50));
+
+  // AxesHelper allow us to see the axes
+  // scene.add(new THREE.AxesHelper(5));
 
   // draw each frame
   return {
@@ -87,6 +111,7 @@ const sketch = ({ context }) => {
       mesh.rotation.y = time * 0.15;
       moonMesh.rotation.y = time * 0.075;
       moonGroup.rotation.y = time * 0.33;
+      sunGroup.rotation.y = time * 1;
 
       controls.update();
       renderer.render(scene, camera);
