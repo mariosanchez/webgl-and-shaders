@@ -10,4 +10,5 @@
     - Metalness map: Defines which parts of the texture are more metalic and which are more rough. 
 
 ## Resources
-- https://freepbr.com/ - Free PBR textures
+- https://three-demos.glitch.me/ - Three.js demos by [@mattdesl](https://twitter.com/mattdesl).
+- https://freepbr.com/ - Free PBR textures.
