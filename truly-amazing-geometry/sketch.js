@@ -72,6 +72,7 @@ const sketch = ({ context }) => {
   // Buffer geometries are usefull to paint a huge amount of geometries by
   // reading from an external data set or randomly painging a bunch of 
   // geometries.
+  // A nice example https://glitch.com/edit/#!/three-demo-buffer-geometry-particles?path=sketch.js
   const bufferGeometry = new THREE.BufferGeometry();
 
   // Define some vertices
