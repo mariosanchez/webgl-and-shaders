@@ -8,3 +8,6 @@
     - Diffuse map: The colors of a texture.
     - Normal map: Gives us the information about the surface of a geometry and how it will react with light hitting it and bouncing off of it.
     - Metalness map: Defines which parts of the texture are more metalic and which are more rough. 
+
+## Resources
+- https://freepbr.com/ - Free PBR textures
