@@ -4,7 +4,9 @@
   "description": "Deep dive into WebGL and Shaders with Three.js",
   "main": "index.js",
   "scripts": {
-    "canvas-sketch": "canvas-sketch"
+    "canvas-sketch": "canvas-sketch",
+    "example:tiny-solar-system": "canvas-sketch tiny-solar-system/sketch.js --hot",
+    "example:torus-material": "canvas-sketch torus-material/torus-material.js --hot"
   },
   "keywords": [
     "three.js",
