@@ -7,7 +7,8 @@
     "canvas-sketch": "canvas-sketch",
     "example:tiny-solar-system": "canvas-sketch tiny-solar-system/sketch.js --hot",
     "example:torus-material": "canvas-sketch torus-material/torus-material.js --hot",
-    "example:truly-amazing-geometry": "canvas-sketch truly-amazing-geometry/sketch.js --hot"
+    "example:truly-amazing-geometry": "canvas-sketch truly-amazing-geometry/sketch.js --hot",
+    "example:this-is-my-first-shader": "canvas-sketch this-is-my-first-shader/sketch.js --hot"
   },
   "keywords": [
     "three.js",

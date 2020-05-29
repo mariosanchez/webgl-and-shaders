@@ -7,9 +7,11 @@
 
 - GLSL: OpenGL Shading Language is a strongly typed language you use to program shaders.
 
+- Attributes: Data contained in each of the vertex, like position, or color, texture coordinates, random numbers. You can have custom attrubutes, just have to declare it.
+
 - Uniforms: Special type of properties of GLSL, that can no ve asigned, are read only and we can pass them with JavaScript, this is their pourpose. They are also not changing for each pixel of the surface, that's why they are called `uniform`.
 
-- Attributes: Data contained in each of the vertex, like position, or color, texture coordinates, random numbers. You can have custom attrubutes, just have to declare it.
+- Varyings: You can define it in a vertex shader but pass it through to a fragment shader. It can change from one side of a surface to the other, this si what they are called `varying`.
 
 - [GPGPU](https://en.wikipedia.org/wiki/General-purpose_computing_on_graphics_processing_units) or General-purpose computing on graphics processing units.
 
