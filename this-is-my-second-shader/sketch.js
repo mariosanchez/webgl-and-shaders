@@ -5,6 +5,7 @@ global.THREE = require("three");
 require("three/examples/js/controls/OrbitControls");
 
 const canvasSketch = require("canvas-sketch");
+const glsl = require("glslify");
 
 const settings = {
   // Make the loop animated
@@ -47,7 +48,8 @@ const sketch = ({ context }) => {
   `;
 
   // Define a fragment shader - Waterfall jump 3
-  const fragmentShader = /* glsl */ `
+  const fragmentShader = glsl(/* glsl */ `
+    #pragma glslify: noise = require('glsl-noise/simplex/3d');
     varying vec2 vUv;
     uniform vec3 color;
     uniform float time;
@@ -55,17 +57,22 @@ const sketch = ({ context }) => {
       vec2 center = vec2(0.5, 0.5); // the center is half of the size
       vec2 q = vUv;
       q.x *= 2.0; // this will squash de circles horizontally
-      vec2 pos = mod(q * 10.0, 1.0); // mod is equal to % in JavaScript, this controll the number of circles
+      q *= 10.0;
+      vec2 pos = mod(q, 1.0); // mod is equal to % in JavaScript, this controll the number of circles
       float d = distance(pos, center); // distance of the pixel to the center
       float circlesSizeVariation = 0.25 + sin(time + vUv.x * 2.0) * 0.25; // just playing around with numbers
-      float mask = step(circlesSizeVariation, d); // same as d > 0.25 ? 1.0 : 0.0; white if is farest of 0.25 black if not
+      // float mask = step(circlesSizeVariation, d); // same as d > 0.25 ? 1.0 : 0.0; white if is farest of 0.25 black if not
+      
+      vec2 noiseInput = floor(q);
+      float offset = noise(vec3(noiseInput.xy, time)) * 0.25;
+      float mask = step(0.25 + offset, d);
       mask = 1.0 - mask; // inverse mask
 
       vec3 fragColor = mix(color, vec3(1), mask); // mix interpolates between 2 colors
 
       gl_FragColor = vec4(vec3(fragColor), 1.0); 
     }
-  `;
+  `);
 
   // Setup a material
   const material = new THREE.ShaderMaterial({

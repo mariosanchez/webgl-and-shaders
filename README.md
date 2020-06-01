@@ -14,6 +14,8 @@
 
 - Varyings: You can define it in a vertex shader but pass it through to a fragment shader. It can change from one side of a surface to the other, this si what they are called `varying`.
 
+- Glslify: Is a javascript library to impor glsl modules using `#pragma` syntax.
+
 - [GPGPU](https://en.wikipedia.org/wiki/General-purpose_computing_on_graphics_processing_units) or General-purpose computing on graphics processing units.
 
 - [Equirectangular images](https://www.google.com/search?q=equirectangular+image&tbm=isch&ved=2ahUKEwi3oPTFkdfpAhVcDWMBHeNrB_wQ2-cCegQIABAA&oq=equirectangular+image&gs_lcp=CgNpbWcQAzICCAAyBAgAEB4yBggAEAUQHjIGCAAQBRAeMgYIABAFEB4yBggAEAUQHjIGCAAQBRAeMgYIABAIEB4yBggAEAgQHjIGCAAQCBAeOgQIIxAnUK0mWIUvYOwvaABwAHgAgAGSAogBpgeSAQU2LjEuMZgBAKABAaoBC2d3cy13aXotaW1n&sclient=img&ei=HfzPXvedLtyajLsP49ed4A8&bih=981&biw=1920) or HDR maps are images that can be mapped onto a sphere.
