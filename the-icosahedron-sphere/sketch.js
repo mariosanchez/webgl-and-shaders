@@ -38,17 +38,20 @@ const sketch = ({ context }) => {
   // Setup a geometry - Waterfall jump 1
   const geometry = new THREE.SphereGeometry(1, 32, 16);
   const baseGeo = new THREE.IcosahedronGeometry(1, 1);
+  const circleGeo = new THREE.CircleGeometry(1, 32);
+  
   points = baseGeo.vertices;
   points.forEach(point => {
     const mesh = new THREE.Mesh(
-      geometry,
+      circleGeo,
       new THREE.MeshBasicMaterial({
-        color: "red",
-        wireframe: true,
+        color: "white",
+        side: THREE.BackSide
       })
     )
     mesh.position.copy(point);
-    mesh.scale.setScalar(0.1);
+    mesh.scale.setScalar(0.1 * Math.random());
+    mesh.lookAt(new THREE.Vector3())
     scene.add(mesh);
   });
 
