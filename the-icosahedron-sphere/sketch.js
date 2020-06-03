@@ -63,6 +63,17 @@ const sketch = ({ context }) => {
     uniform float time;
     uniform vec3 points[POINT_COUNT];
 
+    uniform mat4 modelMatrix;
+
+    float sphereRim (vec3 spherePosition) {
+      vec3 normal = normalize(spherePosition.xyz);
+      vec3 worldNormal = normalize(mat3(modelMatrix) * normal.xyz);
+      vec3 worldPosition = (modelMatrix * vec4(spherePosition, 1.0)).xyz;
+      vec3 V = normalize(cameraPosition - worldPosition);
+      float rim = 1.0 - max(dot(V, worldNormal), 0.0);
+      return pow(smoothstep(0.0, 1.0, rim), 0.5);
+    }
+
     void main() {
       float dist = 1.0;
 
@@ -77,8 +88,12 @@ const sketch = ({ context }) => {
       float mask = step(0.2, dist);
       mask = 1.0 - mask;
 
+      // a value between 0..1
       vec3 fragColor = mix(color, vec3(1.0), mask);
 
+      float rim = sphereRim(vPosition);
+      fragColor = fragColor + rim * 0.3;
+      
       gl_FragColor = vec4(vec3(fragColor), 1.0); 
     }
   `);
