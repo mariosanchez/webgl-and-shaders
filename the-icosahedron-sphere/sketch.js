@@ -98,6 +98,8 @@ const sketch = ({ context }) => {
       fragColor = fragColor + rim * 0.3;
       
       gl_FragColor = vec4(vec3(fragColor), 1.0); 
+
+      if (mask > 0.5) discard;
     }
   `);
 
@@ -106,6 +108,7 @@ const sketch = ({ context }) => {
     defines: {
       POINT_COUNT: points.length
     },
+    side: THREE.DoubleSide,
     extensions: {
       derivatives: true,
     },

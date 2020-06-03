@@ -27,12 +27,15 @@
   - Normal map: Gives us the information about the surface of a geometry and how it will react with light hitting it and bouncing off of it.
   - Metalness map: Defines which parts of the texture are more metalic and which are more rough.
 
+- CSG: Boolean operations on geometry like substract, union, interect, and so on.
+
 ## Resources
 
 - https://github.com/mattdesl/workshop-webgl-glsl - workshop-webgl-glsl
 - https://three-demos.glitch.me/ - Three.js demos by [@mattdesl](https://twitter.com/mattdesl).
 - https://freepbr.com/ - Free PBR textures.
 - https://www.shadertoy.com/ - Browse shaders.
+- https://evanw.github.io/csg.js/ - CSG examples
 
 ## VSCode Extensions
 
