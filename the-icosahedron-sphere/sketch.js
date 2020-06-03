@@ -8,6 +8,8 @@ const canvasSketch = require("canvas-sketch");
 const glsl = require("glslify");
 
 const settings = {
+  duration: 15,
+  dimensions: [1080, 1080],
   // Make the loop animated
   animate: true,
   // Get a WebGL canvas rather than 2D
@@ -130,7 +132,8 @@ const sketch = ({ context }) => {
       camera.updateProjectionMatrix();
     },
     // Update & render your scene here
-    render({ time }) {
+    render({ time, playhead }) {
+      mesh.rotation.y = playhead * Math.PI * 2;
       material.uniforms.time.value = time;
       controls.update();
       renderer.render(scene, camera);

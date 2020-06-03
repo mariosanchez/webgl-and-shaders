@@ -10,7 +10,8 @@
     "example:truly-amazing-geometry": "canvas-sketch truly-amazing-geometry/sketch.js --hot",
     "example:this-is-my-first-shader": "canvas-sketch this-is-my-first-shader/sketch.js --hot",
     "example:this-is-my-second-shader": "canvas-sketch this-is-my-second-shader/sketch.js --hot",
-    "example:the-icosahedron-sphere": "canvas-sketch the-icosahedron-sphere/sketch.js --hot"
+    "example:the-icosahedron-sphere": "canvas-sketch the-icosahedron-sphere/sketch.js --hot",
+    "example:the-icosahedron-sphere:export": "canvas-sketch the-icosahedron-sphere/sketch.js --stream"
   },
   "keywords": [
     "three.js",
@@ -21,6 +22,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@ffmpeg-installer/ffmpeg": "^1.0.20",
     "canvas-sketch-cli": "^1.11.7"
   },
   "dependencies": {
