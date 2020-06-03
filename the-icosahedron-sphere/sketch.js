@@ -55,6 +55,7 @@ const sketch = ({ context }) => {
   // Define a fragment shader - Waterfall jump 3
   const fragmentShader = glsl(/* glsl */ `
     #pragma glslify: noise = require('glsl-noise/simplex/3d');
+    #pragma glslify: aastep = require('glsl-aastep');
 
     varying vec2 vUv;
     varying vec3 vPosition;
@@ -85,7 +86,7 @@ const sketch = ({ context }) => {
         dist = min(d, dist); 
       }
 
-      float mask = step(0.2, dist);
+      float mask = aastep(0.2, dist);
       mask = 1.0 - mask;
 
       // a value between 0..1
@@ -102,6 +103,9 @@ const sketch = ({ context }) => {
   const material = new THREE.ShaderMaterial({
     defines: {
       POINT_COUNT: points.length
+    },
+    extensions: {
+      derivatives: true,
     },
     uniforms: {
       time: { value: 0 },
