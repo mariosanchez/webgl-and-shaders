@@ -14,6 +14,8 @@
 
 - Varyings: You can define it in a vertex shader but pass it through to a fragment shader. It can change from one side of a surface to the other, this si what they are called `varying`.
 
+- Defines: Is another way to access to external data by defining any expressión. You could use them as constants but it may represent any expression of code by using `define foobar 1 + 2` syntax. You can inject them in Three.js using the `defines` property of `ShaderMaterial`.
+
 - Glslify: Is a javascript library to impor glsl modules using `#pragma` syntax.
 
 - [GPGPU](https://en.wikipedia.org/wiki/General-purpose_computing_on_graphics_processing_units) or General-purpose computing on graphics processing units.

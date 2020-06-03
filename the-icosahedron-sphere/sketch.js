@@ -38,28 +38,15 @@ const sketch = ({ context }) => {
   // Setup a geometry - Waterfall jump 1
   const geometry = new THREE.SphereGeometry(1, 32, 16);
   const baseGeo = new THREE.IcosahedronGeometry(1, 1);
-  const circleGeo = new THREE.CircleGeometry(1, 32);
   
   points = baseGeo.vertices;
-  points.forEach(point => {
-    const mesh = new THREE.Mesh(
-      circleGeo,
-      new THREE.MeshBasicMaterial({
-        color: "white",
-        side: THREE.BackSide
-      })
-    )
-    mesh.position.copy(point);
-    mesh.scale.setScalar(0.1 * Math.random());
-    mesh.lookAt(new THREE.Vector3())
-    scene.add(mesh);
-  });
-
-
+  
   // Define a vertex shader - Waterfall jump 2
   const vertexShader = /* glsl */ `
     varying vec2 vUv;
+    varying vec3 vPosition;
     void main() {
+      vPosition = position;
       vUv = uv; // texture cordinates
       gl_Position = projectionMatrix * modelViewMatrix * vec4(position.xyz, 1.0);
     }
@@ -68,19 +55,43 @@ const sketch = ({ context }) => {
   // Define a fragment shader - Waterfall jump 3
   const fragmentShader = glsl(/* glsl */ `
     #pragma glslify: noise = require('glsl-noise/simplex/3d');
+
     varying vec2 vUv;
+    varying vec3 vPosition;
+
     uniform vec3 color;
     uniform float time;
+    uniform vec3 points[POINT_COUNT];
+
     void main() {
-      gl_FragColor = vec4(vec3(color), 1.0); 
+      float dist = 1.0;
+
+      for (int i = 0; i < POINT_COUNT; i++) {
+        vec3 p = points[i];
+        float d = distance(vPosition, p);
+        // we are calculating the neares distance to a icosahedron point
+        // for each pixel
+        dist = min(d, dist); 
+      }
+
+      float mask = step(0.2, dist);
+      mask = 1.0 - mask;
+
+      vec3 fragColor = mix(color, vec3(1.0), mask);
+
+      gl_FragColor = vec4(vec3(fragColor), 1.0); 
     }
   `);
 
   // Setup a material
   const material = new THREE.ShaderMaterial({
+    defines: {
+      POINT_COUNT: points.length
+    },
     uniforms: {
       time: { value: 0 },
-      color: { value: new THREE.Color('tomato') }
+      color: { value: new THREE.Color('tomato') },
+      points: { value: points }
     },
     vertexShader,
     fragmentShader,
