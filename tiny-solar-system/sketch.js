@@ -51,8 +51,8 @@ const sketch = ({ context }) => {
   const geometry = new THREE.SphereGeometry(1, 32, 16);
 
   const loader = new THREE.TextureLoader();
-  const texture = loader.load('earth.jpg');
-  const moonTexture = loader.load('moon.jpg');
+  const texture = loader.load('tiny-solar-system/earth.jpg');
+  const moonTexture = loader.load('tiny-solar-system/moon.jpg');
 
   // Setup a material
   // MeshBasicMaterial does not accept light

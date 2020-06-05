@@ -37,16 +37,19 @@ const sketch = ({ context }) => {
   const geometry = new THREE.TorusGeometry(1, 0.5, 32, 64);
 
   const loader = new THREE.TextureLoader();
-  const map = loader.load('torus-material/brick-diffuse.jpg');
+  const map = loader.load('torus-material/brick-diffuse.png');
   // We need these to repeat along the surface
   map.wrapS = map.wrapT = THREE.RepeatWrapping;
   // With this it will just wrapp all the texture around without repeating it
   map.repeat.set(2, 1).multiplyScalar(2);
 
-  const normalMap = loader.load('torus-material/brick-normal.jpg');
+  const normalMap = loader.load('torus-material/brick-normal.png');
     // We need these to repeat along the surface
   normalMap.wrapS = normalMap.wrapT = THREE.RepeatWrapping;
   normalMap.repeat.copy(map.repeat);
+
+  const displacementMap = loader.load('torus-material/brick-displacement.png')
+  displacementMap.wrapS = displacementMap.wrapT = THREE.RepeatWrapping;
 
   // Setup a material
   const normalStrength = 0.5;
@@ -59,6 +62,8 @@ const sketch = ({ context }) => {
     normalScale: new THREE.Vector2(1, 1).multiplyScalar(normalStrength),
     // Without the normal map the texture will be plain
     normalMap,
+    displacementMap,
+    displacementScale: 0.05,
     map
   });
 
