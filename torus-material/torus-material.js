@@ -38,18 +38,32 @@ const sketch = ({ context }) => {
 
   const loader = new THREE.TextureLoader();
   const map = loader.load('torus-material/brick-diffuse.png');
+  
+  // Sci Fi material
+  // const map = loader.load('torus-material/map.png');
+
   // We need these to repeat along the surface
   map.wrapS = map.wrapT = THREE.RepeatWrapping;
   // With this it will just wrapp all the texture around without repeating it
   map.repeat.set(2, 1).multiplyScalar(2);
 
   const normalMap = loader.load('torus-material/brick-normal.png');
-    // We need these to repeat along the surface
+  
+  // Sci Fi material
+  // const normalMap = loader.load('torus-material/normal.png');
+
+  // We need these to repeat along the surface
   normalMap.wrapS = normalMap.wrapT = THREE.RepeatWrapping;
   normalMap.repeat.copy(map.repeat);
 
   const displacementMap = loader.load('torus-material/brick-displacement.png')
+  
+  // Sci Fi material
+  // const displacementMap = loader.load('torus-material/displacement.png')
+  
+  // We need these to repeat along the surface
   displacementMap.wrapS = displacementMap.wrapT = THREE.RepeatWrapping;
+  displacementMap.repeat.copy(map.repeat);
 
   // Setup a material
   const normalStrength = 0.5;
